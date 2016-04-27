@@ -7,7 +7,8 @@ group = 'com.github.brainless-studios'
 	
 ext {
 	//appName = 'alchemist'
-	jmonkeyengine_version = '3.0.10'
+//	jmonkeyengine_version = '3.0.10'
+	jmonkeyengine_version = '3.1.0-SNAPSHOT'
 }
 	
 repositories {
@@ -16,6 +17,8 @@ repositories {
     mavenCentral()
     maven { url "https://jitpack.io" }
     maven { url "http://updates.jmonkeyengine.org/maven" }
+    maven { url  "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
+    maven { url  "http://dl.bintray.com/simsilica/Sim-tools" }
 }
 
 dependencies {
@@ -30,6 +33,9 @@ dependencies {
 	compile "com.jme3:jme3-effects:$jmonkeyengine_version" 
 	compile "com.jme3:jme3-networking:$jmonkeyengine_version"
 	compile "com.jme3:jme3-blender:$jmonkeyengine_version"
+//	compile "com.jme3:jme3-bullet:jme3-bullet-native.jar"
+//	compile "com.jme3:jme3-bullet:$jmonkeyengine_version"
+	
 	compile "com.jme3:jme3-jbullet:$jmonkeyengine_version"
 	compile "com.jme3:jme3-lwjgl:$jmonkeyengine_version"
 
@@ -57,7 +63,9 @@ dependencies {
 
 	// JME3-JFX
 	compile 'com.github.empirephoenix:JME3-JFX:-SNAPSHOT'
-	
+
+	compile 'com.simsilica:zay-es:1.2.1'
+
 }
 
 sourceCompatibility = 1.8
@@ -71,10 +79,10 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 	from sourceSets.main.allSource
 }
 
-//task javadocJar(type: Jar, dependsOn: javadoc) {
-//	classifier = 'javadoc'
-//	from javadoc.destinationDir
-//}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
 
 artifacts {
 	archives sourcesJar
