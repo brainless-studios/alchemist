@@ -4,7 +4,8 @@ apply plugin: 'eclipse'
 apply plugin: 'maven'
 
 group = 'com.github.brainless-studios'
-	
+version = "0.3.1-SNAPSHOT"
+
 ext {
 	//appName = 'alchemist'
 //	jmonkeyengine_version = '3.0.10'
