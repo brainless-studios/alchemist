@@ -20,6 +20,7 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
 	compile "com.badlogicgames.gdx:gdx-ai:1.6.0"
+	compile "com.jme3:jme3-bullet-native:$jmonkeyengine_version"
 	compile rootProject
 }
 

@@ -34,11 +34,13 @@ dependencies {
 	compile "com.jme3:jme3-effects:$jmonkeyengine_version" 
 	compile "com.jme3:jme3-networking:$jmonkeyengine_version"
 	compile "com.jme3:jme3-blender:$jmonkeyengine_version"
-//	compile "com.jme3:jme3-bullet:jme3-bullet-native.jar"
-//	compile "com.jme3:jme3-bullet:$jmonkeyengine_version"
+//	compile "com.jme3:jme3-bullet-native:$jmonkeyengine_version"
+	compile "com.jme3:jme3-bullet:$jmonkeyengine_version"
 	
 	compile "com.jme3:jme3-jbullet:$jmonkeyengine_version"
 	compile "com.jme3:jme3-lwjgl:$jmonkeyengine_version"
+	
+	compile "com.jme3:jme3-plugins:$jmonkeyengine_version"
 
 	// FasterXML - jackson
 	compile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
