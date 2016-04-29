@@ -17,9 +17,10 @@ repositories {
 	jcenter()
     mavenCentral()
     maven { url "https://jitpack.io" }
-    maven { url "http://updates.jmonkeyengine.org/maven" }
-    maven { url  "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
-    maven { url  "http://dl.bintray.com/simsilica/Sim-tools" }
+    maven { url "https://updates.jmonkeyengine.org/maven" }
+    maven { url  "https://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
+    maven { url  "https://dl.bintray.com/simsilica/Sim-tools" }
+	maven { url  "https://dl.bintray.com/empirephoenix/VGS-OSS-Releases" }
 }
 
 dependencies {
@@ -61,13 +62,14 @@ dependencies {
 	//compile 'com.github.simsilica:pager:-SNAPSHOT'
 	
 	// Zay-ES
-	//compile 'com.simsilica:zay-es:1.3.1-SNAPSHOT'
-	//compile 'com.github.brainless-studios:zay-es:-SNAPSHOT'
+	compile 'com.simsilica:zay-es:1.2.1'
 
 	// JME3-JFX
-	compile 'com.github.empirephoenix:JME3-JFX:-SNAPSHOT'
-
-	compile 'com.simsilica:zay-es:1.2.1'
+//	compile 'com.github.empirephoenix:JME3-JFX:-SNAPSHOT'
+	compile 'com.github.empirephoenix:JME3-JFX:c41352b50a'
+//	compile ('com.jme3x:jfx:2.182.2016-04-29_140923-2292855') {
+//		exclude group: 'org.jmonkeyengine'
+//	}
 
 }
 
