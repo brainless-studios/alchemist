@@ -165,4 +165,10 @@ public class DraggableCameraState extends AbstractAppState {
 			cam.setLocation(cam.getLocation().add(TranslateUtil.toVector3f(velocity.getScaled(moveSpeed/2))));
 		}
 	}
+
+	public Vector3f getLocation() {
+		return cam.getLocation();
+	}
+	
+	
 }
