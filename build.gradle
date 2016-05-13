@@ -9,7 +9,8 @@ version = "0.3.1-SNAPSHOT"
 ext {
 	//appName = 'alchemist'
 //	jmonkeyengine_version = '3.0.10'
-	jmonkeyengine_version = '3.1.0-SNAPSHOT'
+	jmonkeyengine_version = '3.1.0-alpha4'
+//	jmonkeyengine_version = '3.1.0-beta1'
 }
 	
 repositories {
@@ -17,7 +18,7 @@ repositories {
 	jcenter()
     mavenCentral()
     maven { url "https://jitpack.io" }
-    maven { url "https://updates.jmonkeyengine.org/maven" }
+//    maven { url "https://updates.jmonkeyengine.org/maven" }
     maven { url  "https://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
     maven { url  "https://dl.bintray.com/simsilica/Sim-tools" }
 	maven { url  "https://dl.bintray.com/empirephoenix/VGS-OSS-Releases" }
@@ -31,17 +32,17 @@ dependencies {
 	compile 'org.reflections:reflections:0.9.10'
 	
 	// jMonkey Engine
-	compile "com.jme3:jme3-core:$jmonkeyengine_version"
-	compile "com.jme3:jme3-effects:$jmonkeyengine_version" 
-	compile "com.jme3:jme3-networking:$jmonkeyengine_version"
-	compile "com.jme3:jme3-blender:$jmonkeyengine_version"
-//	compile "com.jme3:jme3-bullet-native:$jmonkeyengine_version"
-	compile "com.jme3:jme3-bullet:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-core:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-effects:$jmonkeyengine_version" 
+	compile "org.jmonkeyengine:jme3-networking:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-blender:$jmonkeyengine_version"
+//	compile "org.jmonkeyengine:jme3-bullet-native:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-bullet:$jmonkeyengine_version"
 	
-	compile "com.jme3:jme3-jbullet:$jmonkeyengine_version"
-	compile "com.jme3:jme3-lwjgl:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-jbullet:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-lwjgl:$jmonkeyengine_version"
 	
-	compile "com.jme3:jme3-plugins:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-plugins:$jmonkeyengine_version"
 
 	// FasterXML - jackson
 	compile 'com.fasterxml.jackson.core:jackson-core:2.5.3'
@@ -65,11 +66,12 @@ dependencies {
 	compile 'com.simsilica:zay-es:1.2.1'
 
 	// JME3-JFX
-//	compile 'com.github.empirephoenix:JME3-JFX:-SNAPSHOT'
-	compile 'com.github.empirephoenix:JME3-JFX:c41352b50a'
-//	compile ('com.jme3x:jfx:2.182.2016-04-29_140923-2292855') {
+	compile ('com.github.empirephoenix:JME3-JFX:-SNAPSHOT') {
+//	compile ('com.github.empirephoenix:JME3-JFX:c41352b50a') {
+//	compile ('org.jmonkeyenginex:jfx:2.182.2016-04-29_140923-2292855') {
 //		exclude group: 'org.jmonkeyengine'
-//	}
+//		exclude group: 'com.jme3'
+	}
 
 }
 

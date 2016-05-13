@@ -12,7 +12,7 @@ repositories {
 	mavenLocal()
 	mavenCentral()
 	maven { url "https://jitpack.io" }
-	maven { url 'http://updates.jmonkeyengine.org/maven' }
+//	maven { url 'http://updates.jmonkeyengine.org/maven' }
 	maven { url  "http://dl.bintray.com/jmonkeyengine/org.jmonkeyengine" }
 	maven { url  "http://dl.bintray.com/simsilica/Sim-tools" }
 	maven { url  "https://dl.bintray.com/empirephoenix/VGS-OSS-Releases" }
@@ -21,7 +21,7 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
 	compile "com.badlogicgames.gdx:gdx-ai:1.6.0"
-	compile "com.jme3:jme3-bullet-native:$jmonkeyengine_version"
+	compile "org.jmonkeyengine:jme3-bullet-native:$jmonkeyengine_version"
 	compile rootProject
 }
 
