@@ -20,54 +20,56 @@ import javafx.scene.layout.VBox;
 
 public class Inspector extends BorderPane implements InspectorViewer {
 
-	private final InspectorPresenter presenter;
-	
-	private final Map<Class<? extends EntityComponent>, ComponentEditor> editors = new HashMap<>();
+	protected final InspectorPresenter presenter;
+
+	protected final Map<Class<? extends EntityComponent>, ComponentEditor> editors = new HashMap<>();
 
 	@FXML
-	VBox componentBox;
-	
+	protected VBox componentBox;
+
 	@FXML
-	Label infoLabel;
-	
+	protected Label infoLabel;
+
 	@FXML
-	Button addButton;
+	protected Button addButton;
 
 	public Inspector() {
 		presenter = new InspectorPresenter(this);
 		ViewLoader.loadFXMLForControl(this);
 	}
-	
+
 	@FXML
-	private void initialize(){
+	protected void initialize() {
 		addButton.setOnAction(e -> showComponentChooser());
 		inspectNewEntity(null);
 	}
-	
+
 	@Override
 	public void inspectNewEntity(EntityNode ep){
 		componentBox.getChildren().clear();
 		editors.clear();
 		infoLabel.textProperty().unbind();
-		
+
 		addButton.visibleProperty().setValue(ep != null);
-		
+
 		if(ep == null){
 			infoLabel.setText("No entity selected");
 		} else {
-			for(EntityComponent comp : ep.componentListProperty())
+			for(EntityComponent comp : ep.componentListProperty()) {
 				addComponentEditor(comp);
+			}
 			infoLabel.textProperty().bind(ep.nameProperty());
 		}
 	}
-	
+
 	@Override
 	public void updateComponentEditor(EntityComponent comp){
 		ComponentEditor editor = editors.get(comp.getClass());
-		if(editor.isExpanded())
+		if(editor.isExpanded()) {
 			editor.updateComponent(comp);
+		}
 	}
-	
+
 	@Override
 	public void addComponentEditor(EntityComponent comp){
 		ComponentEditor editor = new ComponentEditor(comp,
@@ -76,15 +78,15 @@ public class Inspector extends BorderPane implements InspectorViewer {
 		editors.put(comp.getClass(), editor);
 		componentBox.getChildren().add(editor);
 	}
-	
+
 	@Override
 	public void removeComponentEditor(EntityComponent comp){
 		ComponentEditor editor = editors.get(comp.getClass());
 		editors.remove(comp.getClass());
 		componentBox.getChildren().remove(editor);
 	}
-	
-	private void showComponentChooser(){
+
+	protected void showComponentChooser() {
 		ChoiceDialog<String> dialog = new ChoiceDialog<>(presenter.getComponentNames().get(0), presenter.getComponentNames());
 		dialog.setTitle("Component choice".toUpperCase());
 		dialog.setHeaderText(null);

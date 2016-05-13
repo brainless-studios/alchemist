@@ -15,19 +15,20 @@ import com.fasterxml.jackson.databind.SerializationFeature;
  * Singleton class that provide access to blueprints on the file system.
  * It deserializes all blueprints file found in "assets/data/blueprints/" at application start,
  * and can save a blue print at the same place.
- * 
+ *
  * @author benoit
  *
  */
 public class BlueprintLibrary {
-//	private static final String PATH = "assets/data/blueprints/";
+	//	private static final String PATH = "assets/data/blueprints/";
 	private static URL url = BlueprintLibrary.class.getResource("/data/blueprints/");
 	private static final String EXTENSION = ".blueprint";
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final Map<String, Blueprint> blueprintMap;
 
 	/**
-	 * Eager deserialization of the blueprints found in PATH
+	 * Eager deserialization of the blueprints found in PATH see <a href="https://github.com/FasterXML/jackson-databind/wiki/JacksonFeatures">here </a>for
+	 * documentation
 	 */
 	static {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -35,14 +36,14 @@ public class BlueprintLibrary {
 		blueprintMap = new HashMap<>();
 		loadBlueprints();
 	}
-	
+
 	/**
 	 * Private constructor for singleton pattern
 	 */
 	private BlueprintLibrary(){
-		
+
 	}
-	
+
 	/**
 	 * Save the given blueprint in a file stored in the default folder.
 	 * @param bp
@@ -57,15 +58,16 @@ public class BlueprintLibrary {
 	}
 
 	private static void loadBlueprints(){
-		for(File f : getFilesDeeply(url.getPath()))
+		for(File f : getFilesDeeply(url.getPath())) {
 			try {
 				Blueprint bp = mapper.readValue(f, Blueprint.class);
 				blueprintMap.put(bp.getName(), bp);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}
 	}
-	
+
 	private static ArrayList<File> getFilesDeeply(String folderPath) {
 		ArrayList<File> res = new ArrayList<>();
 		File folder = new File(folderPath);
@@ -73,14 +75,15 @@ public class BlueprintLibrary {
 			throw new RuntimeException("the folder " + folderPath +  " was not found.");
 		}
 		for (File f : folder.listFiles()) {
-			if(f.isDirectory())
+			if(f.isDirectory()) {
 				res.addAll(getFilesDeeply(f.getPath()));
-			else
+			} else {
 				res.add(f);
+			}
 		}
 		return res;
 	}
-	
+
 	/**
 	 * Returns a list containing all blueprints
 	 * @param name
@@ -89,7 +92,7 @@ public class BlueprintLibrary {
 	public static List<Blueprint> getAllBlueprints(){
 		return new ArrayList<>(blueprintMap.values());
 	}
-	
+
 	/**
 	 * Returns a specific blueprint
 	 * @param name
