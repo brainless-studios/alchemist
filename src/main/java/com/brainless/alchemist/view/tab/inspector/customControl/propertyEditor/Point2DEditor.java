@@ -15,7 +15,7 @@ public class Point2DEditor extends PropertyEditor{
 	private static final int WIDTH = 60;
 
 	TextField xField, yField;
-	
+
 	public Point2DEditor(EntityComponent comp, PropertyDescriptor pd, Consumer3<EntityComponent, String, Object> updateCompFunction) {
 		super(comp, pd, updateCompFunction);
 	}
@@ -34,10 +34,10 @@ public class Point2DEditor extends PropertyEditor{
 		xField.focusedProperty().addListener(e -> setEditionMode());
 
 		box.getChildren().add(xField);
-		
+
 		// y label
 		box.getChildren().add(new Label("Y"));
-		
+
 		// y texte field
 		yField = new TextField();
 		yField.setPrefWidth(WIDTH);
@@ -48,16 +48,18 @@ public class Point2DEditor extends PropertyEditor{
 
 	@Override
 	protected Object getPropertyValue() {
-		return new Point2D(Double.parseDouble(xField.getText()),Double.parseDouble(yField.getText()));  
+		return new Point2D(Double.parseDouble(xField.getText()),Double.parseDouble(yField.getText()));
 	}
 
 	@Override
 	protected void setPropertyValue(Object o) {
 		Point2D p = (Point2D)o;
-		xField.setText(df.format(p.x));
-		yField.setText(df.format(p.y));
+		if (p != null) {
+			xField.setText(df.format(p.x));
+			yField.setText(df.format(p.y));
+		}
 	}
-	
-	
+
+
 
 }
