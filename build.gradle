@@ -9,8 +9,8 @@ version = "0.3.1-SNAPSHOT"
 ext {
 	//appName = 'alchemist'
 //	jmonkeyengine_version = '3.0.10'
-	jmonkeyengine_version = '3.1.0-alpha4'
-//	jmonkeyengine_version = '3.1.0-beta1'
+//	jmonkeyengine_version = '3.1.0-alpha4'
+	jmonkeyengine_version = '3.1.0-beta1'
 }
 	
 repositories {
