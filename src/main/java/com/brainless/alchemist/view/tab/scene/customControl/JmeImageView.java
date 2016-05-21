@@ -27,9 +27,9 @@ import javafx.scene.image.ImageView;
  * @author davidB
  */
 public class JmeImageView {
-	
-	private final SimpleApplication app;
-	private SceneProcessorCopyToImageView jmeAppDisplayBinder = new SceneProcessorCopyToImageView();
+
+	protected final SimpleApplication app;
+	protected SceneProcessorCopyToImageView jmeAppDisplayBinder = new SceneProcessorCopyToImageView();
 
 	public JmeImageView() {
 		app = makeJmeApplication(30);
@@ -111,6 +111,6 @@ public class JmeImageView {
 	public SimpleApplication getApp() {
 		return app;
 	}
-	
-	
+
+
 }
