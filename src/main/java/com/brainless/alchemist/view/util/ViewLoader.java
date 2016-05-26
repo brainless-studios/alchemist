@@ -11,10 +11,11 @@ public class ViewLoader {
 
 	public static <T> T load(Class<?> controllerClass){
 		String fxmlPath;
-		if(controllerClass.getAnnotation(FXMLPath.class) != null)
+		if(controllerClass.getAnnotation(FXMLPath.class) != null) {
 			fxmlPath = controllerClass.getAnnotation(FXMLPath.class).path();
-		else
+		} else {
 			fxmlPath = controllerClass.getSimpleName() + ".fxml";
+		}
 		FXMLLoader loader = new FXMLLoader(controllerClass.getResource(fxmlPath));
 		T res = null;
 		try {
@@ -25,22 +26,24 @@ public class ViewLoader {
 		}
 		return res;
 	}
-	
+
 	/**
 	 * This method will load an FXML file with the name of the given object class,
 	 * concatenated with the fxml file extension and localized in the same package.
 	 * @param control
 	 */
 	public static void loadFXMLForControl(Object control){
-        FXMLLoader fxmlLoader = new FXMLLoader(control.getClass().getResource(control.getClass().getSimpleName() + ".fxml"));
-        fxmlLoader.setRoot(control);
-        fxmlLoader.setController(control);
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-        	LoggerFactory.getLogger(ViewLoader.class).warn("Exception while loading the fxml file associated with " + control.getClass().getSimpleName() + ". Looking for the file " + control.getClass().getResource(control.getClass().getSimpleName() + ".fxml").getPath() + " that doesn't seem to exist.");
-            throw new RuntimeException(exception);
-        }
+		FXMLLoader fxmlLoader = new FXMLLoader(control.getClass().getResource(control.getClass().getSimpleName() + ".fxml"));
+		fxmlLoader.setRoot(control);
+		fxmlLoader.setController(control);
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			LoggerFactory.getLogger(ViewLoader.class)
+					.warn("Exception while loading the fxml file associated with " + control.getClass().getSimpleName() + ". Looking for the file "
+							+ control.getClass().getResource(control.getClass().getSimpleName() + ".fxml").getPath() + " that doesn't seem to exist.");
+			exception.printStackTrace();
+		}
 	}
 
 	/**
@@ -49,13 +52,13 @@ public class ViewLoader {
 	 * @param control
 	 */
 	public static void loadFXMLForControl(Object control, String fxmlPath){
-        FXMLLoader fxmlLoader = new FXMLLoader(control.getClass().getResource(fxmlPath));
-        fxmlLoader.setRoot(control);
-        fxmlLoader.setController(control);
-        try {
-            fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+		FXMLLoader fxmlLoader = new FXMLLoader(control.getClass().getResource(fxmlPath));
+		fxmlLoader.setRoot(control);
+		fxmlLoader.setController(control);
+		try {
+			fxmlLoader.load();
+		} catch (IOException exception) {
+			throw new RuntimeException(exception);
+		}
 	}
 }
