@@ -36,11 +36,11 @@ public class JmeImageView {
 		app.start();
 	}
 
-	private static SimpleApplication makeJmeApplication(int framerate) {
+	protected SimpleApplication makeJmeApplication(int framerate) {
 		AppSettings settings = new AppSettings(true);
 
 		// important to use those settings
-//		settings.putBoolean("GraphicsDebug", true);
+		//		settings.putBoolean("GraphicsDebug", true);
 		settings.setFullscreen(false);
 		settings.setUseInput(false);
 		settings.setFrameRate(Math.max(1, Math.min(60, framerate)));
