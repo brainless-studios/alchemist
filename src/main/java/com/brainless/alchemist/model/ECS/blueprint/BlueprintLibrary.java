@@ -2,7 +2,8 @@ package com.brainless.alchemist.model.ECS.blueprint;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.Map;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+
+import util.exception.TechnicalException;
 
 /**
  * Singleton class that provide access to blueprints on the file system.
@@ -20,8 +23,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
  *
  */
 public class BlueprintLibrary {
-	//	private static final String PATH = "assets/data/blueprints/";
-	private static URL url = BlueprintLibrary.class.getResource("/data/blueprints/");
+	private static URI uri;
 	private static final String EXTENSION = ".blueprint";
 	private static final ObjectMapper mapper = new ObjectMapper();
 	private static final Map<String, Blueprint> blueprintMap;
@@ -34,7 +36,11 @@ public class BlueprintLibrary {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 		blueprintMap = new HashMap<>();
-		loadBlueprints();
+		try {
+			uri = BlueprintLibrary.class.getResource("/data/blueprints/").toURI();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -50,7 +56,7 @@ public class BlueprintLibrary {
 	 */
 	public static void saveBlueprint(Blueprint bp){
 		try {
-			mapper.writeValue(new File(url.getPath(), bp.getName() + EXTENSION), bp);
+			mapper.writeValue(new File(uri.getPath(), bp.getName() + EXTENSION), bp);
 			blueprintMap.put(bp.getName(), bp);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,7 +64,7 @@ public class BlueprintLibrary {
 	}
 
 	private static void loadBlueprints(){
-		for(File f : getFilesDeeply(url.getPath())) {
+		for (File f : getFilesDeeply(uri.getPath())) {
 			try {
 				Blueprint bp = mapper.readValue(f, Blueprint.class);
 				blueprintMap.put(bp.getName(), bp);
@@ -72,7 +78,7 @@ public class BlueprintLibrary {
 		ArrayList<File> res = new ArrayList<>();
 		File folder = new File(folderPath);
 		if (!folder.exists()) {
-			throw new RuntimeException("the folder " + folderPath +  " was not found.");
+			throw new RuntimeException("the folder " + folder.getAbsolutePath() + " was not found.");
 		}
 		for (File f : folder.listFiles()) {
 			if(f.isDirectory()) {
@@ -90,6 +96,9 @@ public class BlueprintLibrary {
 	 * @return
 	 */
 	public static List<Blueprint> getAllBlueprints(){
+		if (blueprintMap.isEmpty()) {
+			loadBlueprints();
+		}
 		return new ArrayList<>(blueprintMap.values());
 	}
 
@@ -99,6 +108,22 @@ public class BlueprintLibrary {
 	 * @return the blueprint, or null if no such blueprint exists in the library
 	 */
 	public static Blueprint getBlueprint(String name){
+		if (blueprintMap.isEmpty()) {
+			loadBlueprints();
+		}
 		return blueprintMap.get(name);
 	}
+
+	public static URI getUri() {
+		return uri;
+	}
+
+	public static void setUri(URI url) {
+		BlueprintLibrary.uri = url;
+		if (url.getPath() == null) {
+			throw new TechnicalException("the path must be exist" + url);
+		}
+
+	}
+
 }
