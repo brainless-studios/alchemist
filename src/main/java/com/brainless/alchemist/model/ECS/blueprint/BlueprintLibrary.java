@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -35,11 +36,13 @@ public class BlueprintLibrary {
 	static {
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+		// or jackson 2.0
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		blueprintMap = new HashMap<>();
 		try {
 			uri = BlueprintLibrary.class.getResource("/data/blueprints/").toURI();
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 	}
 
